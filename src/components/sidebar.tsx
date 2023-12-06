@@ -16,7 +16,7 @@ const Sidebar = styled.div<SidebarStyle>`
   position: fixed;
   top: 0;
   left: 0;
-  width: 250px;
+  width: 300px;
   height: 100%;
   background: ${({ theme }) => theme.bgcontainer};
   transition: transform 0.3s ease-in-out;

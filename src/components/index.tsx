@@ -4,4 +4,17 @@ import Logo from "./logo";
 import SideBar from "./sidebar";
 import Text from "./text";
 import Menu from "./menu";
-export { Button, Input, Logo, SideBar, Text, Menu };
+import CardChat from "./card-chat";
+import Dropdown from "./dropdown";
+import ListChat from "./list-chats";
+export {
+  Button,
+  Input,
+  Logo,
+  SideBar,
+  Text,
+  Menu,
+  CardChat,
+  Dropdown,
+  ListChat,
+};

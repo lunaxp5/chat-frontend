@@ -1,9 +1,9 @@
 import React from "react";
 import { Menu, SideBar } from "../components";
 import styled from "styled-components";
-import NoChats from "../components/no-chats";
 import useToggle from "../hook/useToggle";
 import { Outlet } from "react-router-dom";
+import ListChats from "../components/list-chats";
 interface Props {
   children?: React.ReactNode | React.ReactNode[];
 }
@@ -25,7 +25,7 @@ const Layout = ({ children }: Props) => {
           setOpen();
         }}
       >
-        <NoChats />
+        <ListChats />
       </SideBar>
       <Outlet />
     </Wrapper>
