@@ -38,7 +38,7 @@ const Form = styled.div`
 const Login = () => {
   const navigate = useNavigate();
   const goToHome = () => {
-    navigate("/home");
+    navigate("/");
   };
   return (
     <Wrapper>

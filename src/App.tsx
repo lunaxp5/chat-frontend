@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import { ThemeProvider } from "styled-components";
 import { theme } from "./theme/config";
-import { Contact, Home, Login } from "./pages";
+import { Chat, Contact, Home, Login } from "./pages";
 import Layout from "./layout/layout";
 
 function App() {
@@ -12,14 +12,13 @@ function App() {
       <Router>
         <ThemeProvider theme={theme.light}>
           <Routes>
-            <Route path="/" element={<Login />} />
-          </Routes>
-          <Layout>
-            <Routes>
-              <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} />
               <Route path="/contact" element={<Contact />} />
-            </Routes>
-          </Layout>
+              <Route path="/chat/:chatId" element={<Chat />} />
+            </Route>
+          </Routes>
         </ThemeProvider>
       </Router>
     </div>

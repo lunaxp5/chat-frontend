@@ -1,14 +1,21 @@
 import React from "react";
 import styled from "styled-components";
-import Input from "./Input";
+import Input from "./input";
+import { MdClear } from "react-icons/md";
 
-interface SidebarProps {
+interface SidebarStyle {
   open: boolean;
+}
+interface SidebarProps extends SidebarStyle {
   children?: React.ReactNode | React.ReactNode[];
+  onClose: () => void;
+  search?: boolean;
 }
 
-const Sidebar = styled.div<SidebarProps>`
+const Sidebar = styled.div<SidebarStyle>`
   position: fixed;
+  top: 0;
+  left: 0;
   width: 250px;
   height: 100%;
   background: ${({ theme }) => theme.bgcontainer};
@@ -16,12 +23,33 @@ const Sidebar = styled.div<SidebarProps>`
   transform: ${({ open }) => (open ? "translateX(0)" : "translateX(-100%)")};
   padding: 8px;
   box-sizing: border-box;
+  border-right: 1px solid #d6d6d6;
+  z-index: 100;
 `;
 
-const SideBar = ({ open, children }: SidebarProps) => {
+const Icon = styled(MdClear)`
+  color: ${({ theme }) => theme.dark};
+`;
+
+const Header = styled.div`
+  height: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+`;
+
+const SideBar = ({ open, onClose, children, search }: SidebarProps) => {
   return (
     <Sidebar open={open}>
-      <Input placeholder="Buscar..." />
+      <Header>
+        <Icon
+          onClick={() => {
+            onClose();
+          }}
+        />
+      </Header>
+      {search && <Input placeholder="Buscar..." />}
       {children}
     </Sidebar>
   );
