@@ -46,7 +46,7 @@ const Message = ({ author, time, description, sender }: MessageProps) => {
   return (
     <Wrapper sender={sender}>
       <Header>
-        <Title align={sender ? "right" : "left"}>
+        <Title $align={sender ? "right" : "left"}>
           {sender ? "Tú" : author} {new Date(time).toLocaleTimeString()}
         </Title>
       </Header>

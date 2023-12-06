@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import Input from "./input";
 import { MdClear } from "react-icons/md";
+import Text from "./text";
+import { useNavigate } from "react-router-dom";
 
 interface SidebarStyle {
   open: boolean;
@@ -37,9 +39,29 @@ const Header = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  border-bottom: 1px solid #d6d6d6;
+  margin-bottom: 16px;
+`;
+const Footer = styled.div`
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: flex-end;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: ${({ theme }) => theme.bginput};
+  align-items: center;
+  padding: 0px 8px;
+  box-sizing: border-box;
 `;
 
 const SideBar = ({ open, onClose, children, search }: SidebarProps) => {
+  const navigate = useNavigate();
+  const LogOut = () => {
+    sessionStorage.removeItem("user");
+    navigate("/login");
+  };
   return (
     <Sidebar open={open}>
       <Header>
@@ -51,6 +73,11 @@ const SideBar = ({ open, onClose, children, search }: SidebarProps) => {
       </Header>
       {search && <Input placeholder="Buscar..." />}
       {children}
+      <Footer>
+        <Text onClick={() => LogOut()} color="info">
+          Cerrar sesión
+        </Text>
+      </Footer>
     </Sidebar>
   );
 };

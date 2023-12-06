@@ -24,7 +24,7 @@ const Message = () => {
     <Wrapper>
       <Content>
         <Icon />
-        <Text align="center">No hay contactos aún, vuelve más tarde.</Text>
+        <Text $align="center">No hay contactos aún, vuelve más tarde.</Text>
       </Content>
     </Wrapper>
   );

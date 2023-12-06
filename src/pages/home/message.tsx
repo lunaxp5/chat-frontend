@@ -24,7 +24,7 @@ const Message = () => {
     <Wrapper>
       <Content>
         <Icon />
-        <Text align="center">
+        <Text $align="center">
           En Blabber puedes conectar con muchas personas
         </Text>
       </Content>
