@@ -7,8 +7,10 @@ const Input = styled.input`
   border: none;
   background-color: ${({ theme }) => theme.bginput};
   border-radius: 16px;
+  margin: 8px 0px;
   padding-left: 8px;
-  margin: 8px;
+  box-sizing: border-box;
+
   &:focus-visible {
     outline-color: ${({ theme }) => theme.outLineInpiut};
   }
