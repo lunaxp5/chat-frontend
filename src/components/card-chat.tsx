@@ -80,7 +80,7 @@ const CardChat = ({
   author,
   description,
   image,
-  noRead,
+  noRead = 0,
   lastMessage,
   onClick,
 }: CardProps) => {
@@ -107,22 +107,22 @@ const CardChat = ({
         <CardText color="dark">{truncateText(author, 12)}</CardText>
         <CardText>{description && truncateText(description, 23)}</CardText>
       </Content>
-      {noRead && (
-        <Action>
+      <Action>
+        {noRead > 1 && (
           <Tag>
             <TagText color="lightText">{noRead > 9 ? "9+" : noRead}</TagText>
           </Tag>
-          <Dropdown>
-            <div
-              onClick={() => {
-                console.log("Hola");
-              }}
-            >
-              <Text color="dark">Eliminar</Text>
-            </div>
-          </Dropdown>
-        </Action>
-      )}
+        )}
+        <Dropdown>
+          <div
+            onClick={() => {
+              console.log("Hola");
+            }}
+          >
+            <Text color="dark">Eliminar</Text>
+          </div>
+        </Dropdown>
+      </Action>
     </Wrapper>
   );
 };

@@ -25,7 +25,11 @@ const Layout = ({ children }: Props) => {
           setOpen();
         }}
       >
-        <ListChats />
+        <ListChats
+          onClick={() => {
+            setOpen();
+          }}
+        />
       </SideBar>
       <Outlet />
     </Wrapper>

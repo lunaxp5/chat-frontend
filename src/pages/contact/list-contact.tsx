@@ -5,12 +5,7 @@ import API from "../../services/api";
 import { AxiosError } from "axios";
 import { ErrorBack } from "../../services/type";
 import { useNavigate } from "react-router-dom";
-
-interface ContactI {
-  _id: string;
-  name: string;
-  email: string;
-}
+import { UserI } from "../../types";
 
 const ListContact = () => {
   const navigate = useNavigate();
@@ -67,7 +62,7 @@ const ListContact = () => {
       <>
         <Text>Contactos</Text>
 
-        {list.map((contact: ContactI, index) => {
+        {list.map((contact: UserI, index) => {
           return (
             <CardChat
               key={index}

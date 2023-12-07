@@ -8,24 +8,7 @@ import { AxiosError } from "axios";
 import { ErrorBack } from "../../services/type";
 import { useParams } from "react-router-dom";
 import { Spinner } from "../../components";
-
-interface UserI {
-  _id: string;
-  name: string;
-  email: string;
-}
-
-interface MessageI {
-  sender: UserI;
-  receiver: UserI;
-  description: string;
-  timestamp: Date;
-  read: boolean;
-}
-interface ChatI {
-  participants: string[];
-  messages: MessageI[];
-}
+import { ChatI, MessageI, UserI } from "../../types";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -47,9 +30,8 @@ const Chat = () => {
   const { chatId } = useParams();
 
   const getReceiverId = () => {
-    const receiver = chat?.participants.filter(
-      (uid: string) => user && uid !== user._id
-    );
+    const search = chat?.participants as string[];
+    const receiver = search.filter((uid: string) => user && uid !== user._id);
     if (receiver && receiver?.length > 0) {
       return receiver[0];
     }
@@ -94,11 +76,6 @@ const Chat = () => {
   const isSender = (uidFromMsg: string) => {
     const userStr = sessionStorage.getItem("user");
     const user = userStr && JSON.parse(userStr);
-
-    console.log("----------//---------");
-    console.log(user);
-    console.log(uidFromMsg);
-    console.log(user._id === uidFromMsg);
 
     if (user) {
       return user._id === uidFromMsg;
