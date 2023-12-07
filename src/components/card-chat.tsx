@@ -79,7 +79,7 @@ const CardChat = ({
 }: CardProps) => {
   const truncateText = (text: string, length: number) => {
     if (text.length <= length) {
-      return text.replace(/\s/g, " ");
+      return text;
     }
     return text.replace(/\s/g, " ").slice(0, length) + "...";
   };

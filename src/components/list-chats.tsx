@@ -47,7 +47,10 @@ const ListChat = ({ onClick }: ListChatProps) => {
 
   const getReceiverName = (participants: UserI[]) => {
     const contact = participants.filter((contact) => contact._id !== user?._id);
-    return contact[0].name;
+    if (contact.length > 0) {
+      return contact[0].name;
+    }
+    return user?.name ?? "";
   };
   const lastMessage = (messages: MessageI[]) => {
     if (messages.length > 0) {
