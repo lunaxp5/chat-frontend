@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 import { Button } from "../../components";
-import { MdMessage } from "react-icons/md";
+import { LuMessageSquarePlus } from "react-icons/lu";
+
 import { useNavigate } from "react-router-dom";
 
 const Wrapper = styled.div`
@@ -8,7 +9,7 @@ const Wrapper = styled.div`
   bottom: 32px;
   right: 32px;
 `;
-const Icon = styled(MdMessage)`
+const Icon = styled(LuMessageSquarePlus)`
   font-size: 24px;
   color: ${({ theme }) => theme.lightText};
 `;

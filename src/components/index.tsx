@@ -7,7 +7,9 @@ import Menu from "./menu";
 import CardChat from "./card-chat";
 import Dropdown from "./dropdown";
 import ListChat from "./list-chats";
+import Spinner from "./spinner";
 export {
+  Spinner,
   Button,
   Input,
   Logo,

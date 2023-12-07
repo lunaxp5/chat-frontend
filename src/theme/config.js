@@ -22,6 +22,7 @@ export const theme = {
 
   light: {
     success: "#A9DAA3",
+    lightSuccess: "#C3E5C1",
     darkSuccess: "#73956F",
     danger: "#FC4544",
     warning: "#ffc107",

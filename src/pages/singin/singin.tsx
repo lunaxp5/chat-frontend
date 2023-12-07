@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { Button, Input, Logo } from "../../components";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import API from "../../services/api";
 import { AxiosError } from "axios";
 import { ErrorBack } from "../../services/type";
@@ -14,12 +14,6 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
 `;
-
-const LinkStyled = styled(Link)`
-  margin-top: 8px;
-  text-decoration: none;
-`;
-
 const fadeIn = keyframes`
   0% {
     opacity: 0;
@@ -43,45 +37,36 @@ const Form = styled.div`
   box-sizing: border-box;
   animation: 0.5s ${fadeIn} ease-in;
 `;
-const Login = () => {
+
+const Signin = () => {
   const navigate = useNavigate();
-  const [isLoading, setIsloading] = useState(false);
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [isLoading, setIsloading] = useState(false);
 
   const sendFrom = async () => {
     setIsloading(true);
-
     const user = {
-      name,
       email,
     };
     try {
-      const { data } = await API.post(`/user`, user);
+      const { data } = await API.post(`/user/signin`, user);
       sessionStorage.setItem("user", JSON.stringify(data));
       navigate("/");
     } catch (err) {
       const error = err as AxiosError;
       const errorBack = error.response?.data as ErrorBack;
-      alert(errorBack.message);
+      if (errorBack?.message) {
+        alert(errorBack.message);
+      }
     } finally {
       setIsloading(false);
     }
   };
 
-  // const goToHome = () => {
-  //   navigate("/");
-  // };
   return (
     <Wrapper>
       <Form>
         <Logo />
-        <Input
-          placeholder="Introduce tu nombre"
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
-        />
         <Input
           type="email"
           placeholder="Introduce tu correo"
@@ -89,14 +74,12 @@ const Login = () => {
             setEmail(e.target.value);
           }}
         />
-        <Button isLoading={isLoading} onClick={() => sendFrom()}>
-          Registrarme
+        <Button isLoading={isLoading} type="submit" onClick={() => sendFrom()}>
+          Ingresar
         </Button>
-
-        <LinkStyled to="/sign-in">¿Ya te registraste? inicia sesión</LinkStyled>
       </Form>
     </Wrapper>
   );
 };
 
-export default Login;
+export default Signin;

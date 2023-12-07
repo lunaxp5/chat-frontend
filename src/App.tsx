@@ -10,7 +10,7 @@ import {
 
 import { ThemeProvider } from "styled-components";
 import { theme } from "./theme/config";
-import { Chat, Contact, Home, Login } from "./pages";
+import { Chat, Contact, Home, Login, Signin } from "./pages";
 import Layout from "./layout/layout";
 
 type PrivateRouteProps = {
@@ -34,6 +34,7 @@ function App() {
         <ThemeProvider theme={theme.light}>
           <Routes>
             <Route path="/login" element={<Login />} />
+            <Route path="/sign-in" element={<Signin />} />
             <Route
               path="/"
               element={

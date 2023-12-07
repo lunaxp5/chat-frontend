@@ -1,9 +1,11 @@
 import { ButtonHTMLAttributes, ReactNode } from "react";
 import styled from "styled-components";
+import Spinner from "./spinner";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   rounded?: boolean;
   children: ReactNode | ReactNode[];
+  isLoading?: boolean;
 }
 
 const ButtonStyled = styled.button`
@@ -16,11 +18,16 @@ const ButtonStyled = styled.button`
   border-radius: 16px;
   margin: 8px;
   color: ${(props) => props.theme.lightText};
-  background-color: ${(props) => props.theme.success};
+  background-color: ${({ theme, disabled }) =>
+    disabled ? theme.lightSuccess : theme.success};
   border: none;
 
   &:active {
-    background-color: ${(props) => props.theme.darkSuccess};
+    ${({ disabled, theme }) =>
+      !disabled &&
+      `
+      background-color: ${theme.darkSuccess};
+    `}
   }
 `;
 
@@ -30,11 +37,15 @@ const ButtonRounded = styled(ButtonStyled)`
   border-radius: 50%;
 `;
 
-const Button = ({ rounded, children, ...rest }: ButtonProps) => {
+const Button = ({ rounded, children, isLoading, ...rest }: ButtonProps) => {
   if (rounded) {
     return <ButtonRounded {...rest}>{children}</ButtonRounded>;
   }
-  return <ButtonStyled {...rest}>{children}</ButtonStyled>;
+  return (
+    <ButtonStyled {...rest} disabled={isLoading}>
+      {isLoading ? <Spinner /> : children}
+    </ButtonStyled>
+  );
 };
 
 export default Button;
