@@ -58,10 +58,6 @@ const CardText = styled(Text)`
   font-size: 12px;
   margin: 4px;
 `;
-const TagText = styled(Text)`
-  font-size: 11px;
-  margin: 0px;
-`;
 
 const TimeText = styled(Text)`
   font-size: 12px;
@@ -69,16 +65,6 @@ const TimeText = styled(Text)`
   position: absolute;
   right: 4px;
   top: 4px;
-`;
-
-const Tag = styled.div`
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background-color: ${({ theme }) => theme.danger};
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
 
 const CardChat = ({
@@ -117,11 +103,6 @@ const CardChat = ({
         </Content>
       </Pressable>
       <Action>
-        {noRead > 1 && (
-          <Tag>
-            <TagText color="lightText">{noRead > 9 ? "9+" : noRead}</TagText>
-          </Tag>
-        )}
         {action && (
           <Dropdown>
             <div
