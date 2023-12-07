@@ -39,11 +39,11 @@ const ListContact = () => {
 
     try {
       const { data } = await API.post("/chat", payload);
-      navigate(`/chat/${data[0]._id}`);
+      navigate(`/chat/${data._id}`);
     } catch (err) {
       const error = err as AxiosError;
       const errorBack = error.response?.data as ErrorBack;
-      alert(errorBack.message);
+      alert(errorBack?.message);
     } finally {
       setIsloading(false);
     }
@@ -62,7 +62,7 @@ const ListContact = () => {
       <>
         <Text>Contactos</Text>
 
-        {list.map((contact: UserI, index) => {
+        {list?.map((contact: UserI, index) => {
           return (
             <CardChat
               key={index}

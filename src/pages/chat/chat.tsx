@@ -95,7 +95,7 @@ const Chat = () => {
       <Header />
       <Content>
         {isLoading ? (
-          <Spinner />
+          <Spinner page />
         ) : (
           chat?.messages.map((item: MessageI, index) => {
             return (
