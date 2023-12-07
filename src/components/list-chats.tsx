@@ -93,6 +93,7 @@ const ListChat = ({ onClick }: ListChatProps) => {
         {chats?.map((chat: ChatI, index: number) => {
           return (
             <CardChat
+              action
               key={index}
               author={getReceiverName(chat.participants as UserI[])}
               description={lastMessage(chat.messages)}

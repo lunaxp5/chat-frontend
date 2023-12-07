@@ -3,6 +3,7 @@ import Text from "./text";
 import Dropdown from "./dropdown";
 
 interface CardProps {
+  action?: boolean;
   author: string;
   description?: string;
   image?: string;
@@ -88,6 +89,7 @@ const CardChat = ({
   lastMessage,
   onClick,
   onRemove,
+  action,
 }: CardProps) => {
   const truncateText = (text: string, length: number) => {
     if (text.length <= length) {
@@ -120,15 +122,17 @@ const CardChat = ({
             <TagText color="lightText">{noRead > 9 ? "9+" : noRead}</TagText>
           </Tag>
         )}
-        <Dropdown>
-          <div
-            onClick={() => {
-              onRemove && onRemove();
-            }}
-          >
-            <Text color="dark">Eliminar</Text>
-          </div>
-        </Dropdown>
+        {action && (
+          <Dropdown>
+            <div
+              onClick={() => {
+                onRemove && onRemove();
+              }}
+            >
+              <Text color="dark">Eliminar</Text>
+            </div>
+          </Dropdown>
+        )}
       </Action>
     </Wrapper>
   );
