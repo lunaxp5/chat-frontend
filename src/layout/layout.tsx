@@ -12,6 +12,10 @@ const Wrapper = styled.div`
   width: 100vw;
   background-color: ${({ theme }) => theme.body};
 `;
+const Content = styled.div`
+  height: calc(100% - 100px);
+  overflow-y: scroll;
+`;
 const Layout = ({ children }: Props) => {
   const [open, setOpen] = useToggle();
 
@@ -20,16 +24,17 @@ const Layout = ({ children }: Props) => {
       <Menu onClick={() => setOpen()} />
       <SideBar
         open={open}
-        search
         onClose={() => {
           setOpen();
         }}
       >
-        <ListChats
-          onClick={() => {
-            setOpen();
-          }}
-        />
+        <Content>
+          <ListChats
+            onClick={() => {
+              setOpen();
+            }}
+          />
+        </Content>
       </SideBar>
       <Outlet />
     </Wrapper>

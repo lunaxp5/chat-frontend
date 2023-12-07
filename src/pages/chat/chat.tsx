@@ -79,10 +79,6 @@ const Chat = () => {
     const user = userStr && JSON.parse(userStr);
 
     if (user) {
-      console.log(user._id);
-      console.log(uidFromMsg);
-      console.log(user._id === uidFromMsg);
-
       return user._id === uidFromMsg;
     }
     return false;
