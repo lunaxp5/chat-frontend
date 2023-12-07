@@ -28,18 +28,30 @@ const Icon = styled(IoIosSend)`
 
 const Footer = ({ onClick }: FooterI) => {
   const [msg, setMsg] = useState("");
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      onClick(msg);
+      setMsg("");
+    }
+  };
+
   return (
     <Wrapper>
       <Input
+        value={msg}
         placeholder="Escribir aquí"
         onChange={(e) => {
           setMsg(e.target.value);
         }}
+        onKeyDown={handleKeyDown}
       />
       <Button
         rounded
         onClick={() => {
           onClick(msg);
+          setMsg("");
         }}
       >
         <Icon />
