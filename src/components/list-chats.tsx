@@ -31,6 +31,19 @@ const ListChat = ({ onClick }: ListChatProps) => {
       setIsloading(false);
     }
   };
+  const removeChat = async (chatId: string) => {
+    setIsloading(true);
+    try {
+      await API.delete(`chat/${chatId}`);
+      user && getList(user?._id);
+    } catch (err) {
+      const error = err as AxiosError;
+      const errorBack = error.response?.data as ErrorBack;
+      alert(errorBack.message);
+    } finally {
+      setIsloading(false);
+    }
+  };
 
   const getReceiverName = (participants: UserI[]) => {
     const contact = participants.filter((contact) => contact._id !== user?._id);
@@ -88,6 +101,10 @@ const ListChat = ({ onClick }: ListChatProps) => {
               image={`https://api.dicebear.com/7.x/adventurer-neutral/svg?seed=${index}`}
               onClick={() => {
                 goToChat(chat._id);
+                onClick && onClick();
+              }}
+              onRemove={() => {
+                removeChat(chat._id);
               }}
             />
           );

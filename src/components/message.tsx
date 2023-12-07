@@ -8,7 +8,7 @@ interface MessageProps {
   sender?: boolean;
 }
 interface ContentStyle {
-  sender?: boolean;
+  $sender?: boolean;
 }
 
 const Title = styled(Text)`
@@ -28,7 +28,7 @@ const Wrapper = styled.div<ContentStyle>`
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: ${({ sender }) => (sender ? "flex-end" : "flex-start")};
+  align-items: ${({ $sender }) => ($sender ? "flex-end" : "flex-start")};
   min-height: 20px;
   margin-top: 16px;
 `;
@@ -38,19 +38,19 @@ const Content = styled.div<ContentStyle>`
   padding: 8px;
   box-sizing: border-box;
   border-radius: 16px;
-  background-color: ${({ theme, sender }) =>
-    sender ? theme.info : theme.bgcontainer};
+  background-color: ${({ theme, $sender }) =>
+    $sender ? theme.info : theme.bgcontainer};
 `;
 
 const Message = ({ author, time, description, sender }: MessageProps) => {
   return (
-    <Wrapper sender={sender}>
+    <Wrapper $sender={sender}>
       <Header>
         <Title $align={sender ? "right" : "left"}>
           {sender ? "Tú" : author} {new Date(time).toLocaleTimeString()}
         </Title>
       </Header>
-      <Content sender={sender}>
+      <Content $sender={sender}>
         <Description color={sender ? "lightText" : "dark"}>
           {description}
         </Description>

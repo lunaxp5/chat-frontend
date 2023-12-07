@@ -5,7 +5,7 @@ interface DropDownProps {
   children: React.ReactNode | React.ReactNode[];
 }
 interface DropDownStyle {
-  isOpen: boolean;
+  $isOpen: boolean;
 }
 const DropdownButton = styled.button`
   font-size: 24px;
@@ -14,7 +14,7 @@ const DropdownButton = styled.button`
 `;
 
 const DropdownMenu = styled.div<DropDownStyle>`
-  display: ${(props) => (props.isOpen ? "block" : "none")};
+  display: ${(props) => (props.$isOpen ? "block" : "none")};
   position: absolute;
   right: 0;
   background-color: #f9f9f9;
@@ -30,7 +30,7 @@ const Dropdown = ({ children }: DropDownProps) => {
   return (
     <div>
       <DropdownButton onClick={() => setIsOpen(!isOpen)}>⋮</DropdownButton>
-      <DropdownMenu isOpen={isOpen}>{children}</DropdownMenu>
+      <DropdownMenu $isOpen={isOpen}>{children}</DropdownMenu>
     </div>
   );
 };

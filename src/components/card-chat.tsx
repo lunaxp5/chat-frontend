@@ -9,6 +9,7 @@ interface CardProps {
   noRead?: number;
   lastMessage?: Date;
   onClick?: () => void;
+  onRemove?: () => void;
 }
 
 const Wrapper = styled.div`
@@ -18,6 +19,9 @@ const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.bgcontainer};
   border-bottom: 1px solid #d6d6d6;
   position: relative;
+`;
+const Pressable = styled.div`
+  display: flex;
 `;
 
 const ImgWrapper = styled.div`
@@ -83,6 +87,7 @@ const CardChat = ({
   noRead = 0,
   lastMessage,
   onClick,
+  onRemove,
 }: CardProps) => {
   const truncateText = (text: string, length: number) => {
     if (text.length <= length) {
@@ -92,21 +97,23 @@ const CardChat = ({
   };
 
   return (
-    <Wrapper
-      onClick={() => {
-        onClick && onClick();
-      }}
-    >
-      <TimeText>
-        {lastMessage && new Date(lastMessage).toLocaleTimeString()}
-      </TimeText>
-      <ImgWrapper>
-        <Img src={image} alt="img-chat" />
-      </ImgWrapper>
-      <Content>
-        <CardText color="dark">{truncateText(author, 12)}</CardText>
-        <CardText>{description && truncateText(description, 23)}</CardText>
-      </Content>
+    <Wrapper>
+      <Pressable
+        onClick={() => {
+          onClick && onClick();
+        }}
+      >
+        <TimeText>
+          {lastMessage && new Date(lastMessage).toLocaleTimeString()}
+        </TimeText>
+        <ImgWrapper>
+          <Img src={image} alt="img-chat" />
+        </ImgWrapper>
+        <Content>
+          <CardText color="dark">{truncateText(author, 12)}</CardText>
+          <CardText>{description && truncateText(description, 23)}</CardText>
+        </Content>
+      </Pressable>
       <Action>
         {noRead > 1 && (
           <Tag>
@@ -116,7 +123,7 @@ const CardChat = ({
         <Dropdown>
           <div
             onClick={() => {
-              console.log("Hola");
+              onRemove && onRemove();
             }}
           >
             <Text color="dark">Eliminar</Text>
