@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import NoChats from "./no-chats";
 import API from "../services/api";
 import { AxiosError } from "axios";
