@@ -79,6 +79,10 @@ const Chat = () => {
     const user = userStr && JSON.parse(userStr);
 
     if (user) {
+      console.log(user._id);
+      console.log(uidFromMsg);
+      console.log(user._id === uidFromMsg);
+
       return user._id === uidFromMsg;
     }
     return false;
@@ -108,7 +112,7 @@ const Chat = () => {
               <Message
                 key={index}
                 sender={isSender(item.sender._id)}
-                author={item.receiver.name}
+                author={item.sender.name}
                 description={item.description}
                 time={item.timestamp}
               />
