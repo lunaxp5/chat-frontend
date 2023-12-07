@@ -4,9 +4,7 @@ import { Text } from "../../components";
 
 const Wrapper = styled.div`
   margin-top: 128px;
-  padding-top: 24px;
-  box-sizing: border-box;
-  max-width: 220px;
+  width: 100%;
 `;
 const Content = styled.div`
   display: flex;

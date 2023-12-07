@@ -4,10 +4,11 @@ import Dropdown from "./dropdown";
 
 interface CardProps {
   author: string;
-  description: string;
-  image: string;
-  noRead: number;
-  lastMessage: Date;
+  description?: string;
+  image?: string;
+  noRead?: number;
+  lastMessage?: Date;
+  onClick?: () => void;
 }
 
 const Wrapper = styled.div`
@@ -81,6 +82,7 @@ const CardChat = ({
   image,
   noRead,
   lastMessage,
+  onClick,
 }: CardProps) => {
   const truncateText = (text: string, length: number) => {
     if (text.length <= length) {
@@ -90,29 +92,37 @@ const CardChat = ({
   };
 
   return (
-    <Wrapper>
-      <TimeText>{new Date(lastMessage).toLocaleTimeString()}</TimeText>
+    <Wrapper
+      onClick={() => {
+        onClick && onClick();
+      }}
+    >
+      <TimeText>
+        {lastMessage && new Date(lastMessage).toLocaleTimeString()}
+      </TimeText>
       <ImgWrapper>
         <Img src={image} alt="img-chat" />
       </ImgWrapper>
       <Content>
         <CardText color="dark">{truncateText(author, 12)}</CardText>
-        <CardText>{truncateText(description, 23)}</CardText>
+        <CardText>{description && truncateText(description, 23)}</CardText>
       </Content>
-      <Action>
-        <Tag>
-          <TagText color="lightText">{noRead > 9 ? "9+" : noRead}</TagText>
-        </Tag>
-        <Dropdown>
-          <div
-            onClick={() => {
-              console.log("Hola");
-            }}
-          >
-            <Text color="dark">Eliminar</Text>
-          </div>
-        </Dropdown>
-      </Action>
+      {noRead && (
+        <Action>
+          <Tag>
+            <TagText color="lightText">{noRead > 9 ? "9+" : noRead}</TagText>
+          </Tag>
+          <Dropdown>
+            <div
+              onClick={() => {
+                console.log("Hola");
+              }}
+            >
+              <Text color="dark">Eliminar</Text>
+            </div>
+          </Dropdown>
+        </Action>
+      )}
     </Wrapper>
   );
 };
