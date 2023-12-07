@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 import Header from "./header";
 import Message from "../../components/message";
 import Footer from "./footer";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import API from "../../services/api";
 import { AxiosError } from "axios";
 import { ErrorBack } from "../../services/type";
@@ -28,6 +28,7 @@ const Chat = () => {
   const [user, setUser] = useState<UserI>();
   const [chat, setChat] = useState<ChatI>();
   const { chatId } = useParams();
+  const contentRef = useRef<HTMLDivElement | null>(null);
 
   const getReceiverId = () => {
     const search = chat?.participants as string[];
@@ -82,6 +83,11 @@ const Chat = () => {
     }
     return false;
   };
+  useEffect(() => {
+    if (contentRef.current) {
+      contentRef.current.scrollTop = contentRef.current.scrollHeight;
+    }
+  });
 
   useEffect(() => {
     const userStr = sessionStorage.getItem("user");
@@ -93,7 +99,7 @@ const Chat = () => {
   return (
     <Wrapper>
       <Header />
-      <Content>
+      <Content ref={contentRef}>
         {isLoading ? (
           <Spinner page />
         ) : (
