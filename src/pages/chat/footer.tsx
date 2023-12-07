@@ -1,6 +1,11 @@
 import { styled } from "styled-components";
 import { Button, Input } from "../../components";
 import { IoIosSend } from "react-icons/io";
+import { useState } from "react";
+
+interface FooterI {
+  onClick: (e: string) => void;
+}
 
 const Wrapper = styled.div`
   height: 80px;
@@ -21,11 +26,22 @@ const Icon = styled(IoIosSend)`
   color: ${({ theme }) => theme.lightText};
 `;
 
-const Footer = () => {
+const Footer = ({ onClick }: FooterI) => {
+  const [msg, setMsg] = useState("");
   return (
     <Wrapper>
-      <Input placeholder="Escribir aquí" />
-      <Button rounded>
+      <Input
+        placeholder="Escribir aquí"
+        onChange={(e) => {
+          setMsg(e.target.value);
+        }}
+      />
+      <Button
+        rounded
+        onClick={() => {
+          onClick(msg);
+        }}
+      >
         <Icon />
       </Button>
     </Wrapper>
