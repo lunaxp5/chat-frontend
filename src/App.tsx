@@ -5,7 +5,6 @@ import {
   Routes,
   Route,
   Navigate,
-  Outlet,
 } from "react-router-dom";
 
 import { ThemeProvider } from "styled-components";
